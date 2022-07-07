@@ -3,11 +3,12 @@ package kau.isabu.web_project.service;
 import kau.isabu.web_project.domain.member;
 import kau.isabu.web_project.repository.MemorymemberRepository;
 import kau.isabu.web_project.repository.memberRepository;
+import org.springframework.stereotype.Service;
 
 import java.lang.reflect.Member;
 import java.util.List;
 import java.util.Optional;
-
+@Service
 public class MemberService {
     private final memberRepository MemberRepository;
 
