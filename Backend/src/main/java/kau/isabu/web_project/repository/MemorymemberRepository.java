@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.*;
 
-@Repository
+
 public class MemorymemberRepository implements  memberRepository{
     private static Map<Long, member> store = new HashMap<>();
     private static long sequence = 0L;
