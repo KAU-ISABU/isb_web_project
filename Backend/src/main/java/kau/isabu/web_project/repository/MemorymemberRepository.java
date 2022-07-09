@@ -1,8 +1,11 @@
 package kau.isabu.web_project.repository;
 
 import kau.isabu.web_project.domain.member;
+import org.springframework.stereotype.Repository;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.*;
+
 
 public class MemorymemberRepository implements  memberRepository{
     private static Map<Long, member> store = new HashMap<>();
