@@ -3,6 +3,7 @@ package kau.isabu.web_project;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import kau.isabu.web_project.repository.JdbcMemberReposity;
+import kau.isabu.web_project.repository.JdbcTemplateMemberRepository;
 import kau.isabu.web_project.repository.MemorymemberRepository;
 import kau.isabu.web_project.repository.memberRepository;
 import kau.isabu.web_project.service.MemberService;
@@ -32,6 +33,6 @@ public class SpringConfig {
 
     @Bean
     public memberRepository MemberRepository(){
-        return new JdbcMemberReposity(dataSource);
+        return new JdbcTemplateMemberRepository(dataSource);
     }
 }
