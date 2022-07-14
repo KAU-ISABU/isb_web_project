@@ -1,5 +1,6 @@
 package kau.isabu.web_project;
 
+import kau.isabu.web_project.aop.TimeTraceAop;
 import kau.isabu.web_project.repository.*;
 import kau.isabu.web_project.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
