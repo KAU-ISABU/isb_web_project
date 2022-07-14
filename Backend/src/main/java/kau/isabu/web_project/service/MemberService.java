@@ -4,11 +4,13 @@ import kau.isabu.web_project.domain.member;
 import kau.isabu.web_project.repository.MemorymemberRepository;
 import kau.isabu.web_project.repository.memberRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.lang.reflect.Member;
 import java.util.List;
 import java.util.Optional;
 
+@Transactional
 public class MemberService {
     private final memberRepository MemberRepository;
 
