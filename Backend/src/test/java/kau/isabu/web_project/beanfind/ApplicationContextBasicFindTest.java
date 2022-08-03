@@ -5,6 +5,7 @@ import kau.isabu.web_project.member.MemberService;
 import kau.isabu.web_project.member.MemberServiceImpl;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import static org.assertj.core.api.Assertions.*;
@@ -26,5 +27,9 @@ public class ApplicationContextBasicFindTest {
     void 구체타입으로조회(){
         MemberServiceImpl memberService = applicationContext.getBean("memberService",MemberServiceImpl.class);
         assertThat(memberService).isInstanceOf(MemberServiceImpl.class);
+    }
+    @Test
+    void 빈이름으로조회실패(){
+        org.junit.jupiter.api.Assertions.assertThrows(NoSuchBeanDefinitionException.class,()->applicationContext.getBean("tt", MemberService.class));
     }
 }
