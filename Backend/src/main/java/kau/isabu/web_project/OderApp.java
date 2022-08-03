@@ -7,13 +7,14 @@ import kau.isabu.web_project.member.MemberServiceImpl;
 import kau.isabu.web_project.order.Order;
 import kau.isabu.web_project.order.OrderService;
 import kau.isabu.web_project.order.OrderServiceImpl;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 public class OderApp {
     public static void main(String[] args) {
-        AppConfig appConfig = new AppConfig();
-        MemberService memberService = appConfig.memberService();
-        OrderService orderService = appConfig.orderService();
-
+        ApplicationContext applicationContext = new AnnotationConfigApplicationContext(AppConfig.class);
+        MemberService memberService = applicationContext.getBean("memberService",MemberService.class);
+        OrderService orderService = applicationContext.getBean("orderService",OrderService.class);
         Long memberId=1L;
         Member mem = new Member(memberId,"Koosaga", Grade.VIP);
         memberService.join(mem);
