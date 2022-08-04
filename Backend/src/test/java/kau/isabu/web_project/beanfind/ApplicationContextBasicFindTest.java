@@ -1,12 +1,18 @@
 package kau.isabu.web_project.beanfind;
 
 import kau.isabu.web_project.AppConfig;
+import kau.isabu.web_project.discount.DiscountPolicy;
+import kau.isabu.web_project.discount.FixDiscountPolicy;
+import kau.isabu.web_project.discount.RateDiscountPolicy;
 import kau.isabu.web_project.member.MemberService;
 import kau.isabu.web_project.member.MemberServiceImpl;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
+import org.springframework.beans.factory.NoUniqueBeanDefinitionException;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -31,5 +37,24 @@ public class ApplicationContextBasicFindTest {
     @Test
     void 빈이름으로조회실패(){
         org.junit.jupiter.api.Assertions.assertThrows(NoSuchBeanDefinitionException.class,()->applicationContext.getBean("tt", MemberService.class));
+    }
+
+    @Test
+    void 중복타입빈오류(){
+        AnnotationConfigApplicationContext annotationConfigApplicationContext = new AnnotationConfigApplicationContext(SameBeanConfig.class);
+        org.junit.jupiter.api.Assertions.assertThrows(NoUniqueBeanDefinitionException.class,()->annotationConfigApplicationContext.getBean(DiscountPolicy.class));
+    }
+    @Configuration
+    static class SameBeanConfig{
+        @Bean
+        public DiscountPolicy discountPolicy()
+        {
+            return new RateDiscountPolicy();
+        }
+        @Bean
+        public DiscountPolicy discountPolicy2()
+        {
+            return new FixDiscountPolicy();
+        }
     }
 }
