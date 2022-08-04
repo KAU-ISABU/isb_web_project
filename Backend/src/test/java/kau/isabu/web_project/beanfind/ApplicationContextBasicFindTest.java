@@ -14,6 +14,8 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import java.util.Map;
+
 import static org.assertj.core.api.Assertions.*;
 
 public class ApplicationContextBasicFindTest {
@@ -38,7 +40,6 @@ public class ApplicationContextBasicFindTest {
     void 빈이름으로조회실패(){
         org.junit.jupiter.api.Assertions.assertThrows(NoSuchBeanDefinitionException.class,()->applicationContext.getBean("tt", MemberService.class));
     }
-
     @Test
     void 중복타입빈오류(){
         AnnotationConfigApplicationContext annotationConfigApplicationContext = new AnnotationConfigApplicationContext(SameBeanConfig.class);
@@ -55,6 +56,16 @@ public class ApplicationContextBasicFindTest {
         public DiscountPolicy discountPolicy2()
         {
             return new FixDiscountPolicy();
+        }
+    }
+
+    @Test
+    void 특정타입모두조회() {
+        AnnotationConfigApplicationContext annotationConfigApplicationContext = new AnnotationConfigApplicationContext(SameBeanConfig.class);
+        Map<String, DiscountPolicy> beansOfType = annotationConfigApplicationContext.getBeansOfType(DiscountPolicy.class);
+        for(String s : beansOfType.keySet()){
+            DiscountPolicy now_bean = annotationConfigApplicationContext.getBean(s, DiscountPolicy.class);
+            assertThat(now_bean).isInstanceOf(DiscountPolicy.class);
         }
     }
 }
