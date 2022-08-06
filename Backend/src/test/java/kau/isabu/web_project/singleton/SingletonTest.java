@@ -14,4 +14,11 @@ public class SingletonTest {
         MemberService memberService2 = appConfig.memberService();
         Assertions.assertThat(memberService1).isEqualTo(memberService2);
     }
+
+    @Test
+    void 싱글톤패턴테스트(){
+        SingletonService singletonService = SingletonService.getSingletonService();
+        SingletonService singletonService2 = SingletonService.getSingletonService();
+        Assertions.assertThat(singletonService).isSameAs(singletonService2);
+    }
 }
